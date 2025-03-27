@@ -49,6 +49,7 @@
     );
 
     //   Create unsub function if you want to call it manually later - also call the pendingExtrinsics rpc method to get extrinsics in the tx pool
+    const seenHashes = new Set();
     unsubNewTxs = setInterval(async () => {
       try {
         const extrinsics = await api.rpc.author.pendingExtrinsics();
@@ -59,14 +60,13 @@
           return;
         }
         // some extrinsics are duplicate, for a yet unknown reason
-        const seenHashes = new Set();
         const uniqueExtrinsics = extrinsics.filter(extrinsic => {
           const hash = extrinsic.hash.toString();
           if (seenHashes.has(hash)) {
             return false; // Skip duplicates
           }
-          seenHashes.add(hash);
-          return true; // Keep unique
+          seenHashes.add(hash); // Add unique hash to the Set
+          return true; // Keep unique extrinsic
         });
         uniqueExtrinsics.forEach((extrinsic, index) => {
           newTxs = [...newTxs, { counter, extrinsic }];
