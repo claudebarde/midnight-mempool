@@ -2,6 +2,7 @@
   import type { Extrinsic } from "@polkadot/types/interfaces";
   import Zzz from "../assets/zzz.svelte";
   import MempoolTransaction from "./MempoolTransaction.svelte";
+  import { state as appState } from "$lib/state.svelte";
 
   const { newTxs }: { newTxs: Array<Transaction> } = $props();
 
@@ -79,7 +80,7 @@
       {#each newTxs as tx, index (tx)}
         <MempoolTransaction tx={tx.extrinsic} />
       {:else}
-        <Zzz stroke="#463699" />
+        <Zzz stroke={appState.theme === "light" ? "#463699" : "#fbd5bd"} />
       {/each}
     </div>
   </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SignedBlock } from "@polkadot/types/interfaces";
   import Cube from "../assets/cube.svelte";
+  import { state } from "$lib/state.svelte";
 
   export let blocks: Array<SignedBlock>;
 
@@ -58,7 +59,6 @@
 
         p {
           margin: 2px;
-          color: $royal-wisteria;
           font-weight: bold;
         }
       }
@@ -79,13 +79,13 @@
         {#if index + 1 == blocks.length}
           <div class="block current-block">
             <p>{block.block.header.number}</p>
-            <Cube stroke="#463699" />
+            <Cube stroke={state.theme === "light" ? "#463699" : "#fbd5bd"} />
             <p>&nbsp;</p>
           </div>
         {:else}
           <div class="block">
             <p>&nbsp;</p>
-            <Cube stroke="#463699" />
+            <Cube stroke={state.theme === "light" ? "#463699" : "#fbd5bd"} />
             <p>{block.block.header.number}</p>
           </div>
         {/if}
