@@ -12,6 +12,10 @@ declare global {
     counter: number;
     extrinsic: Extrinsic;
   }
+  type Theme = "light" | "dark";
+  type State = {
+    theme: Theme;
+  };
 }
 
 export {};

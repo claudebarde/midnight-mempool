@@ -17,7 +17,6 @@
   let blocks: Array<SignedBlock> = $state([]);
   let counter = $state(0);
   let newTxs: Array<Transaction> = $state([]);
-  // let newTxs: Array<String> = $state([]);
   const numberOfBlocks = 7;
 
   const setUp = async () => {
@@ -69,9 +68,11 @@
           return true; // Keep unique extrinsic
         });
         uniqueExtrinsics.forEach((extrinsic, index) => {
+          console.log(`Extrinsic meta:`, extrinsic.meta.toHuman());
           newTxs = [...newTxs, { counter, extrinsic }];
           const currentCounter = counter;
           setTimeout(() => {
+            // Remove the extrinsic from the newTxs array after 5 seconds
             newTxs = [...newTxs.filter(tx => tx.counter !== currentCounter)];
           }, 5000);
           counter++;
@@ -102,19 +103,6 @@
 
 <style lang="scss">
   @use "../styles/global.scss" as *;
-
-  :global(html, body) {
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    background-color: $silver-bird;
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    color: $cold-steel;
-  }
 
   main {
     padding: 10px;
