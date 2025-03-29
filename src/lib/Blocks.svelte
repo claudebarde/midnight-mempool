@@ -2,6 +2,7 @@
   import type { SignedBlock } from "@polkadot/types/interfaces";
   import Cube from "../assets/cube.svelte";
   import { state } from "$lib/state.svelte";
+  import { shortenHash } from "$lib/utils";
 
   export let blocks: Array<SignedBlock>;
 
@@ -71,7 +72,7 @@
   <div class="blocks-display">
     <div class="blocks-details">
       <p>Current block</p>
-      <p>{getBlockHash(blocks[blocks.length - 1])}</p>
+      <p>{shortenHash(getBlockHash(blocks[blocks.length - 1]))}</p>
       <p>{getBlockTxs(blocks[blocks.length - 1])} transaction(s)</p>
     </div>
     <div class="blocks">

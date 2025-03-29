@@ -74,7 +74,7 @@
           setTimeout(() => {
             // Remove the extrinsic from the newTxs array after 5 seconds
             newTxs = [...newTxs.filter(tx => tx.counter !== currentCounter)];
-          }, 5000);
+          }, 5000000);
           counter++;
           // Option 1: Convert the extrinsic to a human-readable format.
           const human = extrinsic.toHuman();

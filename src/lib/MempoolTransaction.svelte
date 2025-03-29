@@ -2,19 +2,9 @@
   import { onMount } from "svelte";
   import type { Extrinsic } from "@polkadot/types/interfaces";
   let { tx }: { tx: Extrinsic } = $props();
-
-  type TxType = "transfer" | "other";
+  import { getTxType } from "$lib/utils";
 
   let txType = $state("other");
-
-  const getTxType = (extrinsic: Extrinsic): TxType => {
-    const tx = extrinsic.meta.toHuman();
-
-    if (tx.name === "send_mn_transaction") {
-      return "transfer";
-    }
-    return "other";
-  };
 
   onMount(() => {
     txType = getTxType(tx);
@@ -27,6 +17,7 @@
   .transaction {
     position: relative; // Position the element relative to the container
     animation: slide-out 3s ease-in forwards;
+    padding: 3px;
 
     img {
       width: 30px;

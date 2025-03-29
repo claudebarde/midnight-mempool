@@ -12,6 +12,7 @@ declare global {
     counter: number;
     extrinsic: Extrinsic;
   }
+  type TxType = "transfer" | "other";
   type Theme = "light" | "dark";
   type State = {
     theme: Theme;
